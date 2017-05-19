@@ -137,14 +137,22 @@ deletechunk = function(){
         console.log("Err remove selected",err);
     });
 }
+stopacak = function(ack,callback){
+    
+    callback(ack);
+};
 $("#tblacak").click(function(){
     if($("#tblacak").attr("src")=="/images/play.svg"){
         deletechunk();
         $("#tblacak").attr("src","/images/stop.svg")
         _acak = acak();
     }else{
-        $("#tblacak").attr("src","/images/play.svg")
-        clearInterval(_acak);
+        stopacak(_acak,function(x){
+            clearInterval(x);
+            $("#tblacak").attr("src","/images/play.svg");
+        });
+        //$("#tblacak").attr("src","/images/play.svg")
+        //clearInterval(_acak);
     }
 });
 $("#tblrefresh").click(function(){
